@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--
+牛马AI日报 · 公众号 HTML 骨架
+用法：复制本文件为 每日AI晨报_{date}_公众号.html，替换所有 {{...}} 占位，保留全部样式串。
+规范见 references/layout.md 与 references/spec.md。
+复制区只取下面两条注释之间的 section；本注释在复制区外，不会进草稿。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牛马AI日报 · {{DATE}}</title>
+</head>
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;">
+
+<!-- ===== 复制时选中下面这个 section 的全部内容，粘贴进公众号编辑器即可 ===== -->
+<section id="wechat-article" style="margin:0;padding:0;background:#ffffff;color:#333333;font-size:16px;line-height:1.85;text-align:left;">
+
+  <!-- 头部 -->
+  <section style="margin:0 0 18px;padding:0 0 16px;border-bottom:3px solid #c0392b;">
+    <p style="margin:0 0 10px;font-size:27px;font-weight:800;color:#1f2d3d;line-height:1.3;letter-spacing:0;text-align:left;">牛马AI日报</p>
+    <p style="margin:0;font-size:15px;font-weight:700;color:#5b6470;text-align:left;">{{YYYY 年 M 月 D 日 · 周X}}</p>
+  </section>
+
+  <!-- 本期速览 -->
+  <section style="margin:0 0 8px;padding:10px 12px;background:#f7f8fa;border-left:3px solid #c0392b;border-radius:0;">
+    <p style="margin:0 0 6px;font-size:12px;font-weight:700;color:#c0392b;letter-spacing:0;text-align:left;">本期速览</p>
+    <p style="margin:0 0 3px;font-size:14px;line-height:1.8;text-align:left;"><strong>一 要闻</strong>｜{{一句结论}}</p>
+    <p style="margin:0 0 3px;font-size:14px;line-height:1.8;text-align:left;"><strong>二 报告</strong>｜{{一句结论}}</p>
+    <p style="margin:0 0 3px;font-size:14px;line-height:1.8;text-align:left;"><strong>三 工具</strong>｜{{一句结论}}</p>
+    <p style="margin:0 0 3px;font-size:14px;line-height:1.8;text-align:left;"><strong>四 版本</strong>｜{{一句结论}}</p>
+    <p style="margin:0 0 3px;font-size:14px;line-height:1.8;text-align:left;"><strong>五 插件</strong>｜{{一句结论}}</p>
+    <p style="margin:0;font-size:14px;line-height:1.8;text-align:left;"><strong>六 MATLAB</strong>｜{{一句结论}}</p>
+  </section>
+
+  <!-- 第一部分 -->
+  <section style="margin:30px 0 16px;padding:0;border-bottom:none;">
+    <p style="margin:0;padding:0 0 0 11px;border-left:4px solid #c0392b;font-size:18px;font-weight:700;color:#1f2d3d;line-height:1.45;text-align:left;">一、过去 24 小时 AI 核心要闻</p>
+  </section>
+
+  <section style="margin:0 0 18px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">01 {{标题}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;">{{一句要点：事实、关键数据、边界}}</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">{{来源名称}} https://{{一手链接}}</p>
+  </section>
+  <!-- 按需复制 3-5 条；来源链接必须是本段最后一个 p -->
+
+  <!-- 第二部分 -->
+  <section style="margin:30px 0 16px;padding:0;border-bottom:none;">
+    <p style="margin:0;padding:0 0 0 11px;border-left:4px solid #c0392b;font-size:18px;font-weight:700;color:#1f2d3d;line-height:1.45;text-align:left;">二、官方新报告</p>
+  </section>
+  <!-- 标题下直接进 ①，不要盘点框、不要缺口说明、不要「今天有 N 份」 -->
+
+  <section style="margin:0 0 18px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">① {{报告名}}：{{一句话}}</p>
+    <p style="margin:0 0 10px;font-size:12px;color:#6b7280;text-align:left;">{{发布机构}} ｜ {{YYYY-MM-DD}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>问题</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>方法与数据</strong>：{{方法 + 关键数据，厂商自测标口径}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>边界</strong>：{{自测口径 / 未开源 / 仅供研究 / 版本依赖等具体局限}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>为什么值得关注</strong>：{{}}</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">https://{{一手官方链接}}<br>论文 https://{{论文或预印本链接}}</p>
+  </section>
+  <!-- 复制到 3 份（不足按实际数量，不用旧报告凑数）；只列窗口内 -->
+
+  <!-- 第三部分 -->
+  <section style="margin:30px 0 16px;padding:0;border-bottom:none;">
+    <p style="margin:0;padding:0 0 0 11px;border-left:4px solid #c0392b;font-size:18px;font-weight:700;color:#1f2d3d;line-height:1.45;text-align:left;">三、今日最值得推荐的 AI 工具用法</p>
+  </section>
+
+  <section style="margin:0 0 20px;padding:10px 12px;background:#f0f7f4;border-left:4px solid #2f855a;border-radius:0;">
+    <p style="margin:0 0 6px;font-size:17px;font-weight:700;color:#1e5639;text-align:left;">{{工具名}} {{版本}}</p>
+    <p style="margin:0 0 10px;font-size:15px;text-align:left;">{{一句话定位}}</p>
+    <p style="margin:0;font-size:14px;line-height:1.8;text-align:left;"><strong>来源与作者</strong>：{{平台 / 作者 / 发布日期 / 规模数据}}</p>
+  </section>
+
+  <section style="margin:0 0 12px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">核心思路</p>
+    <p style="margin:0;font-size:15px;text-align:left;">{{核心思路，不堆配置名与命令}}</p>
+  </section>
+
+  <section style="margin:0 0 12px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">官方自测、适用场景与价值</p>
+    <p style="margin:0 0 6px;font-size:15px;text-align:left;">{{自测数据 + 具体工具局限}}</p>
+    <p style="margin:0 0 6px;font-size:15px;text-align:left;"><strong>适用</strong>：{{场景}}；<strong>安装与效果验证无需记命令，把项目名或上方链接交给 AI Agent 即可完成</strong>。</p>
+    <p style="margin:0 0 6px;font-size:15px;text-align:left;"><strong>为什么值得关注</strong>：{{}}</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">https://{{一手链接}}</p>
+  </section>
+
+  <!-- 第四部分 -->
+  <section style="margin:30px 0 16px;padding:0;border-bottom:none;">
+    <p style="margin:0;padding:0 0 0 11px;border-left:4px solid #c0392b;font-size:18px;font-weight:700;color:#1f2d3d;line-height:1.45;text-align:left;">四、DeepSeek-Harness 最新版本</p>
+  </section>
+
+  <section style="margin:0 0 16px;padding:10px 12px;background:#eef4fc;border-left:4px solid #1a4d8f;border-radius:0;">
+    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">{{有新版本：dsh-vX.Y.Z｜或「今日无新增」}}</p>
+    <p style="margin:0;font-size:15px;text-align:left;">{{YYYY-MM-DD HH:MM（北京时间）发布，版本性质}}</p>
+  </section>
+
+  <section style="margin:0 0 12px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">新增功能</p>
+    <p style="margin:0;font-size:15px;text-align:left;">{{主要更新与变更点}}</p>
+  </section>
+
+  <section style="margin:0 0 30px;padding:10px 12px;background:#fff8f3;border-left:4px solid #d97706;border-radius:0;">
+    <p style="margin:0 0 6px;font-size:15px;font-weight:700;color:#b45309;text-align:left;">升级前要处理的破坏性变更</p>
+    <p style="margin:0 0 6px;font-size:15px;text-align:left;">{{变更点与版本依赖门槛}}</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;text-align:left;">https://github.com/deepseek-ai/deepseek-harness/releases/tag/{{TAG}}</p>
+  </section>
+
+  <!-- 第五部分 -->
+  <section style="margin:30px 0 16px;padding:0;border-bottom:none;">
+    <p style="margin:0;padding:0 0 0 11px;border-left:4px solid #c0392b;font-size:18px;font-weight:700;color:#1f2d3d;line-height:1.45;text-align:left;">五、Awesome DSH Plugin 清单更新</p>
+  </section>
+  <!-- 标题下直接进 ①，不要「今天是一次集中批量更新」等盘点框 -->
+
+  <section style="margin:0 0 12px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">① 新增 / 更新条目</p>
+    <p style="margin:0;font-size:15px;text-align:left;">清单索引约 {{N}} 个插件，<strong>新增约 {{N}} 条、约 {{N}} 条更新了安装信息、{{N}} 条下架</strong>。</p>
+  </section>
+
+  <section style="margin:0 0 10px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">② 实用插件重点推荐</p>
+  </section>
+
+  <section style="margin:0 0 8px;padding:10px 12px;background:#fafbfc;border-left:3px solid #1a4d8f;border-radius:0;">
+    <p style="margin:0 0 4px;font-size:15px;font-weight:700;text-align:left;">{{分类}}</p>
+    <p style="margin:0 0 5px;font-size:14px;text-align:left;">• <strong>{{插件名}}</strong>（{{Star}}）：{{一句话功能}}。<span style="color:#2f855a;">【{{推荐标签}}】</span>{{适用场景}}</p>
+    <p style="margin:0;font-size:14px;text-align:left;">• <strong>{{插件名}}</strong>（{{Star}}）：{{一句话功能与适用场景}}</p>
+  </section>
+  <!-- 按分类复制；重心放功能解读与适用场景，不成串列 PR 编号 -->
+
+  <section style="margin:0 0 16px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0;font-size:15px;text-align:left;"><strong>③ 榜单头部插件排名变化：今日无</strong></p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">https://github.com/awesome-dsh-plugin/awesome-dsh-plugin</p>
+  </section>
+
+  <!-- 第六部分 -->
+  <section style="margin:30px 0 16px;padding:0;border-bottom:none;">
+    <p style="margin:0;padding:0 0 0 11px;border-left:4px solid #c0392b;font-size:18px;font-weight:700;color:#1f2d3d;line-height:1.45;text-align:left;">六、MATLAB / Simulink × Agent 编程动态</p>
+  </section>
+  <!-- 单一板块：标题下直接进官方动态 / 工具动态，不要盘点框、不拆多个小节堆叠 -->
+
+  <section style="margin:0 0 12px;padding:10px 12px;background:#fafbfc;border-left:3px solid #1a4d8f;border-radius:0;">
+    <p style="margin:0 0 6px;font-size:15px;font-weight:700;text-align:left;">01 {{官方动态标题}}</p>
+    <p style="margin:0 0 7px;font-size:14px;text-align:left;">{{机构 / 仓库 / Star / 北京时间}}</p>
+    <p style="margin:0 0 7px;font-size:14px;text-align:left;">• {{变更点与版本依赖门槛}}</p>
+    <p style="margin:0 0 7px;font-size:14px;text-align:left;"><strong>为何关注</strong>：{{}}</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.7;text-align:left;">https://{{MathWorks 官方 / GitHub Releases 一手链接}}</p>
+  </section>
+
+  <section style="margin:0 0 16px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 6px;font-size:15px;font-weight:700;color:#1f2d3d;text-align:left;">工具动态</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;">{{工具名、版本 / Star、一句话功能与适用场景；保留具体局限如不支持 Linux ARM}}</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">官方总入口 https://www.mathworks.com/products/agentic-ai.html<br>github.com/matlab/{{仓库}}</p>
+  </section>
+
+  <section style="margin:0;padding:14px 0 0;border-top:1px solid #e8eaed;">
+    <p style="margin:0;font-size:12px;color:#8a919b;line-height:1.8;text-align:left;">编发｜算法牛马</p>
+  </section>
+
+</section>
+<!-- ===== 复制区结束 ===== -->
+
+</body>
+</html>
