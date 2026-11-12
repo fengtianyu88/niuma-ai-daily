@@ -44,6 +44,22 @@ python wechat_draft_push.py --update-media-id <media_id>
 - AppID 不敏感；AppSecret 曾在对话里明文出现，长期自动运行前建议重置一次并改用环境变量注入。
 - 公众号后台前置条件：已认证账号、IP 白名单（IPv4 优先，曾实测 `27.38.245.100`，可能变动）、草稿箱与素材管理权限。
 
+### 国外网站抓取失败的 VPN 兜底（按流量计费，能直连就不用）
+
+适用场景：WebFetch / WebSearch / curl 直连国外站点持续超时或被重置，且已排除是页面本身下线（换 URL、用搜索验证存在性）。**先直连，代理是最后手段。**
+
+**订阅链接只存在本地一处**：工作区根目录 `vpn_subscription.txt`（用户明确要求落盘保存，每天日报要用）。**绝不把链接写进本 Skill 仓库或推到 GitHub**——仓库是公开的，写进去等于泄露。取回顺序：① 直接读该文件；② 文件丢失时从本工作区的历史会话记录（`~/.workbuddy/projects/` 下本工作区对应目录的 `*.jsonl`）按「包含 `subscribe?token=` 加 32 位十六进制串的订阅链接」特征检索。两种方式均仅当次使用、不回显完整 token、不复制到其他任何文件。
+
+无头拉起流程（不依赖 GUI，不碰系统代理设置）：
+
+1. 下载订阅为 Clash YAML：`curl -s "<订阅链接>&flag=clash" -o %TEMP%\niuma_proxy.yaml`（临时目录，用完删）。
+2. 启动内核：`"C:\Program Files\Clash Verge\verge-mihomo.exe" -f %TEMP%\niuma_proxy.yaml`（后台运行，默认混合端口 7890）。
+3. 仅给当次抓取命令注入代理：`HTTPS_PROXY=http://127.0.0.1:7890 HTTP_PROXY=http://127.0.0.1:7890 curl …` 或 WebFetch 前设置进程环境变量。**不开启系统代理**，避免全局流量走计费线路。
+4. 抓取完成**立即**：杀掉 verge-mihomo 进程（`taskkill /IM verge-mihomo.exe /F`）+ 删除临时 YAML。
+5. 流量纪律：只代理失败的域名请求，成功即关；禁止用代理跑大流量下载或批量抓取；忘记关闭视为事故。
+
+核验关闭：`tasklist | grep -i mihomo` 无输出 + 临时 YAML 已删，才算收尾。
+
 ## 三、微信官方 API
 
 基址 `https://api.weixin.qq.com/cgi-bin`。
