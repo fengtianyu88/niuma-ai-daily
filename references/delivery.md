@@ -50,15 +50,15 @@ python wechat_draft_push.py --update-media-id <media_id>
 
 **订阅链接只存在本地一处**：工作区根目录 `vpn_subscription.txt`（用户明确要求落盘保存，每天日报要用）。**绝不把链接写进本 Skill 仓库或推到 GitHub**——仓库是公开的，写进去等于泄露。取回顺序：① 直接读该文件；② 文件丢失时从本工作区的历史会话记录（`~/.workbuddy/projects/` 下本工作区对应目录的 `*.jsonl`）按「包含 `subscribe?token=` 加 32 位十六进制串的订阅链接」特征检索。两种方式均仅当次使用、不回显完整 token、不复制到其他任何文件。
 
-无头拉起流程（不依赖 GUI，不碰系统代理设置）：
+无头拉起流程（不依赖 GUI，不碰系统代理设置）。**以下三步都有实测踩坑，不可省**：
 
-1. 下载订阅为 Clash YAML：`curl -s "<订阅链接>&flag=clash" -o %TEMP%\niuma_proxy.yaml`（临时目录，用完删）。
-2. 启动内核：`"C:\Program Files\Clash Verge\verge-mihomo.exe" -f %TEMP%\niuma_proxy.yaml`（后台运行，默认混合端口 7890）。
-3. 仅给当次抓取命令注入代理：`HTTPS_PROXY=http://127.0.0.1:7890 HTTP_PROXY=http://127.0.0.1:7890 curl …` 或 WebFetch 前设置进程环境变量。**不开启系统代理**，避免全局流量走计费线路。
-4. 抓取完成**立即**：杀掉 verge-mihomo 进程（`taskkill /IM verge-mihomo.exe /F`）+ 删除临时 YAML。
+1. 下载订阅为 Clash YAML：`curl -s "<订阅链接>&flag=clash" -o %TEMP%\niuma_proxy.yaml`（临时目录，用完删）。**实测坑①：订阅站本身在 IPv4 下被 TCP 阻断（DNS 正常但连接超时），必须加 `-6` 走 IPv6**：`curl -6 -s --max-time 90 ...`。**实测坑②：慢链路下响应会中途截断（YAML 解析失败），订阅服务器不支持 Range 断点续传，只能加大 `--max-time`（如 300 秒）整份重拉**。**实测坑③：若订阅拉不下来，可直接用 Clash Verge 的缓存配置**：`%APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\` 下节点数不为 0 的 YAML（实判同一家订阅、mixed-port 7890，距更新久一点但节点可用）。
+2. 启动内核：**必须带 `-d` 指到 Clash Verge 数据目录**（里面有现成的 `Country.mmdb` / geoip 数据库）：`"C:\Program Files\Clash Verge\verge-mihomo.exe" -d "%APPDATA%\io.github.clash-verge-rev.clash-verge-rev" -f <配置> > %TEMP%\niuma_mihomo.log 2>&1`（后台运行，默认混合端口 7890）。**实测坑：不带 `-d` 时内核找不到本地 MMDB 会去联网下载，被墙卡死、端口永不监听、日志只停在 "Can't find MMDB, start download"**。启动后等 3-5 秒再验证端口。
+3. 仅给当次抓取命令注入代理：`curl -x http://127.0.0.1:7890 ...` 或 WebFetch 前设置 `HTTPS_PROXY=http://127.0.0.1:7890` 环境变量。**不开启系统代理**，避免全局流量走计费线路。返回 301/302 也算通（重定向），加 `-L` 跟随确认内容可达。
+4. 抓取完成**立即**：杀掉 verge-mihomo 进程（`taskkill /IM verge-mihomo.exe /F`）+ 删除临时 YAML 与内核日志。
 5. 流量纪律：只代理失败的域名请求，成功即关；禁止用代理跑大流量下载或批量抓取；忘记关闭视为事故。
 
-核验关闭：`tasklist | grep -i mihomo` 无输出 + 临时 YAML 已删，才算收尾。
+核验关闭：`tasklist | grep -i mihomo` 无输出、`netstat` 无 7890 LISTEN、临时 YAML 已删，才算收尾（TIME_WAIT 属正常收尾状态，不算残留）。2026-11-12 实测：三个目标站 x.ai / mistral.ai / ai.meta.com 直连均 HTTP 000，过代理全部 200；订阅余量充足（约 900 GB 总量，已用约 3.6 GB）。
 
 ## 三、微信官方 API
 
