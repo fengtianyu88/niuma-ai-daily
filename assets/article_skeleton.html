@@ -55,10 +55,10 @@
   <section style="margin:0 0 18px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
     <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">① {{报告名}}：{{一句话}}</p>
     <p style="margin:0 0 10px;font-size:12px;color:#6b7280;text-align:left;">{{发布机构}} ｜ {{YYYY-MM-DD}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>问题</strong>：{{}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>方法与数据</strong>：{{方法 + 关键数据，厂商自测标口径}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>边界</strong>：{{自测口径 / 未开源 / 仅供研究 / 版本依赖等具体局限}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>为什么值得关注</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>出发点</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>做法</strong>：{{方法 + 关键数据，厂商自测标口径}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>局限</strong>：{{自测口径 / 未开源 / 仅供研究 / 版本依赖等具体局限}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>看点</strong>：{{}}</p>
     <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">https://{{一手官方链接}}<br>论文 https://{{论文或预印本链接}}</p>
   </section>
   <!-- 复制到 3 份（不足按实际数量，不用旧报告凑数）；只列窗口内 -->
@@ -71,13 +71,13 @@
   <section style="margin:0 0 30px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
     <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">{{工具名}} {{版本}}</p>
     <p style="margin:0 0 10px;font-size:12px;color:#6b7280;text-align:left;">{{平台 / 作者}} ｜ {{发布日期}} · {{规模数据}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>一句话定位</strong>：{{}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>核心思路</strong>：{{不堆配置名与命令}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>适用场景与边界</strong>：{{场景 + 厂商自测口径 + 具体局限}}；<strong>安装与效果验证无需记命令，把项目名或链接交给 AI Agent 即可完成</strong>。</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>为什么值得关注</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>定位</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>思路</strong>：{{不堆配置名与命令}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>适用场景</strong>：{{场景 + 厂商自测口径 + 具体局限}}；<strong>安装与效果验证无需记命令，把项目名或链接交给 AI Agent 即可完成</strong>。</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>看点</strong>：{{}}</p>
     <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">https://{{一手链接}}</p>
   </section>
-  <!-- 第三部分只有一条，用「16px 条目标题 + 12px 信息行 + 15px 内联子段」的单条目结构。禁止把「核心思路」「适用场景」拆成 16px 标题 + dashed 的独立小节，否则读者会当成新条目；也不要另套绿底卡片 -->
+  <!-- 第三部分只有一条，用「16px 条目标题 + 12px 信息行 + 15px 内联子段」的单条目结构。禁止把「思路」「适用场景」拆成 16px 标题 + dashed 的独立小节，否则读者会当成新条目；也不要另套绿底卡片 -->
 
   <!-- 第四部分 -->
   <section style="margin:30px 0 16px;padding:0;border-bottom:none;">
@@ -88,8 +88,8 @@
   <section style="margin:0 0 30px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
     <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">{{dsh-vX.Y.Z：一句话概括这次更新}}</p>
     <p style="margin:0 0 10px;font-size:12px;color:#6b7280;text-align:left;">DeepSeek ｜ {{YYYY-MM-DD HH:MM（北京时间）}}发布 · {{版本性质}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>主要更新</strong>：{{}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>破坏性变更与版本门槛</strong>：{{直接写具体事实，用户需要判断}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>更新内容</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>破坏性变更</strong>：{{直接写具体事实，用户需要判断}}</p>
     <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">https://github.com/deepseek-ai/deepseek-harness/releases/tag/{{TAG}}</p>
   </section>
 
@@ -134,8 +134,8 @@
   <section style="margin:0 0 18px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
     <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">{{官方动态标题}}</p>
     <p style="margin:0 0 8px;font-size:12px;color:#6b7280;text-align:left;">{{机构 / 仓库}} ｜ GitHub ★ {{N}} ｜ {{YYYY-MM-DD（北京时间）}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>变更点与版本门槛</strong>：{{}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>为何关注</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>变更点</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>看点</strong>：{{}}</p>
     <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.7;text-align:left;">https://{{MathWorks 官方 / GitHub Releases 一手链接}}</p>
   </section>
 
@@ -157,8 +157,8 @@
     <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">① {{论文标题}}：{{一句话发现}}</p>
     <p style="margin:0 0 10px;font-size:12px;color:#6b7280;text-align:left;">{{团队 / 机构}} ｜ {{期刊或会议名（影响因子）/ arXiv 预印本}} ｜ {{YYYY-MM-DD}}</p>
     <p style="margin:0 0 8px;font-size:15px;text-align:left;">{{方法与关键结果，一句话}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>边界与局限</strong>：{{场景限制 / 自建基准 / 参数量级 / 未开源}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>为什么值得关注</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>局限</strong>：{{场景限制 / 自建基准 / 参数量级 / 未开源}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>看点</strong>：{{}}</p>
     <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">论文 https://{{DOI 或 arXiv 链接}}</p>
   </section>
   <!-- 按重要性复制 1-3 条；期刊/会议论文标注期刊或会议名，arXiv 标注「预印本」 -->
@@ -167,9 +167,9 @@
   <section style="margin:0 0 30px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
     <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">③ 开源项目｜{{项目名}} {{版本}}：{{一句话功能}}</p>
     <p style="margin:0 0 10px;font-size:12px;color:#6b7280;text-align:left;">{{owner/repo}} ｜ GitHub ★ {{6,915}}（{{M-D}} 抓取）<br>{{YYYY-MM-DD 发布版本}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>做了什么</strong>：{{核心改动与关键数据}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>边界与局限</strong>：{{作者自述的限制}}</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>为什么值得关注</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>做法</strong>：{{核心改动与关键数据}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>局限</strong>：{{作者自述的限制}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>看点</strong>：{{}}</p>
     <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">项目地址 https://github.com/{{owner}}/{{repo}}</p>
   </section>
   <!-- 只收新项目 / 重大 release / 重大功能更新；零散提交不收；无则整块写「今日无」 -->
