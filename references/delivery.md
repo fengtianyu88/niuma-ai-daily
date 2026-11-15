@@ -16,6 +16,7 @@ python make_cover.py --date 2026-11-12 --out cover_2026-11-12.jpg
 ```
 
 - 主标题默认「牛马AI日报」，署名「算法牛马」，`--out` 默认 `cover_{date}.jpg`。
+- **封面样式最终定稿（2026-11-13 10:38 用户确认）：`--style` 默认 `minimal`，即「不要那些花哨的装饰，题目和日期就行」那句的原版——白底、只有标题与日期、六个字均匀排（字距 6、无词距分组）、标题深黑为主仅「A」蓝「I」红、中文 96px / AI 92px / 标题 y=118、日期 30px 灰色居中。已与当初样张逐像素比对一致。定时任务不传 `--style` 即生成该版。不要再叠加 ink 基线对齐、整块垂直居中、字号放大、四色、词距分组等任何「优化」——多方案对比（词距/彩色分组/左对齐）后用户仍选定原版。** `classic` / `flat` / `blue-red` / `decor` / `words` 仅为对照备选，须用户明确要求才切换。
 - 生成后用图片查看确认主标题无截断、无乱码、无遮挡。
 - 封面是草稿**必填项**，且必须是永久图片素材，脚本会自动调 `material/add_material` 换 `media_id`。
 
@@ -35,6 +36,25 @@ python wechat_draft_push.py --update-media-id <media_id>
 主要参数：`--html`（默认 `每日AI晨报_{date}_公众号.html`）、`--title`（默认 `牛马AI日报 · YYYY 年 M 月 D 日`）、`--author`（默认 `算法牛马`）、`--digest`（默认从速览提取）、`--cover`（默认 `cover_{date}.jpg`）、`--thumb-media-id`、`--update-media-id`、`--upsert`、`--check`。
 
 日期全部按北京时间 `datetime.now(timezone(timedelta(hours=8))).date()` 动态生成，不写死。
+
+### 多图文合并（日报头条 + BMS 周报次条）
+
+订阅号**一天只能群发一次**（一天一条通知），日报每天发、BMS 算法周报原定每周日发，周日必然撞额度。解法是周日把两份合成**一条多图文**：日报做头条、周报做次条，一次群发两篇都到。
+
+```bash
+# 周日：头条日报 + 次条 BMS 周报，合成一条多图文草稿
+python wechat_draft_push.py --upsert \
+  --second-html BMS算法周报_{date}_公众号.html \
+  --second-title "BMS 算法追踪 {date}"
+
+# 只改次条：定位原草稿 media_id 后同样带 --second-*
+python wechat_draft_push.py --update-media-id <media_id> --second-html ... --second-title ...
+```
+
+- 次条封面留空即复用头条封面；`--second-author` 留空同头条；`--second-digest` 留空从次条自己的速览提取。
+- `draft/add` 与 `draft/update` 都支持多图文：`articles` 传数组即建多图文，`draft/update` 用 `index` 逐篇更新（0 = 头条）。
+- **群发接口无权限**（订阅号 `message/mass/send` 返回 48001）：脚本只能把草稿建好、更新好，最后一步「群发」必须在公众号后台手动点。
+- 合并成多图文后，**删掉当天残留的单篇草稿**，否则草稿箱里同一天会出现两三份重复内容。删前先比对标题 + 篇数 + 正文长度，确认是被多图文取代的那份。
 
 ## 二、凭据与安全
 
@@ -107,7 +127,7 @@ article 字段：`title`、`author`、`digest`（≤120 字）、`content`、`co
 - [ ] 日期、标题、HTML 文件名、封面名都是当天，没有写死 `2026-11-12`
 - [ ] 窗口为运行时刻往前 24 小时，全文只写窗口内
 - [ ] 19 个来源官网 + arXiv 补漏都真查过，没查的不写进标题或结论
-- [ ] 六部分齐全，速览六条，第二部分大标题「二、官方新报告」
+- [ ] 七部分齐全，速览七条，第二部分大标题「二、官方新报告」
 - [ ] HTML 配平、每个 `<p>` 有 `text-align:left`、链接都在段末、禁止词零残留
 - [ ] 封面主标题「牛马AI日报」，已上传为永久素材
 - [ ] `--upsert` 保证当天重跑不产生重复草稿

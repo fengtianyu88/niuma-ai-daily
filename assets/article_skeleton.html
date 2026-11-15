@@ -30,7 +30,8 @@
     <p style="margin:0 0 3px;font-size:14px;line-height:1.8;text-align:left;"><strong>三 工具</strong>｜{{一句结论}}</p>
     <p style="margin:0 0 3px;font-size:14px;line-height:1.8;text-align:left;"><strong>四 版本</strong>｜{{一句结论}}</p>
     <p style="margin:0 0 3px;font-size:14px;line-height:1.8;text-align:left;"><strong>五 插件</strong>｜{{一句结论}}</p>
-    <p style="margin:0;font-size:14px;line-height:1.8;text-align:left;"><strong>六 MATLAB</strong>｜{{一句结论}}</p>
+    <p style="margin:0 0 3px;font-size:14px;line-height:1.8;text-align:left;"><strong>六 MATLAB</strong>｜{{一句结论}}</p>
+    <p style="margin:0;font-size:14px;line-height:1.8;text-align:left;"><strong>七 论文与开源</strong>｜{{一句结论}}</p>
   </section>
 
   <!-- 第一部分 -->
@@ -39,7 +40,7 @@
   </section>
 
   <section style="margin:0 0 18px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
-    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">01 {{标题}}</p>
+    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">① {{标题}}</p>
     <p style="margin:0 0 8px;font-size:15px;text-align:left;">{{一句要点：事实、关键数据、边界}}</p>
     <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">{{来源名称}} https://{{一手链接}}</p>
   </section>
@@ -67,44 +68,36 @@
     <p style="margin:0;padding:0 0 0 11px;border-left:4px solid #c0392b;font-size:18px;font-weight:700;color:#1f2d3d;line-height:1.45;text-align:left;">三、今日最值得推荐的 AI 工具用法</p>
   </section>
 
-  <section style="margin:0 0 20px;padding:10px 12px;background:#f0f7f4;border-left:4px solid #2f855a;border-radius:0;">
-    <p style="margin:0 0 6px;font-size:17px;font-weight:700;color:#1e5639;text-align:left;">{{工具名}} {{版本}}</p>
-    <p style="margin:0 0 10px;font-size:15px;text-align:left;">{{一句话定位}}</p>
-    <p style="margin:0;font-size:14px;line-height:1.8;text-align:left;"><strong>来源与作者</strong>：{{平台 / 作者 / 发布日期 / 规模数据}}</p>
-  </section>
-
-  <section style="margin:0 0 12px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
-    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">核心思路</p>
-    <p style="margin:0;font-size:15px;text-align:left;">{{核心思路，不堆配置名与命令}}</p>
-  </section>
-
-  <section style="margin:0 0 12px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
-    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">官方自测、适用场景与价值</p>
-    <p style="margin:0 0 6px;font-size:15px;text-align:left;">{{自测数据 + 具体工具局限}}</p>
-    <p style="margin:0 0 6px;font-size:15px;text-align:left;"><strong>适用</strong>：{{场景}}；<strong>安装与效果验证无需记命令，把项目名或上方链接交给 AI Agent 即可完成</strong>。</p>
-    <p style="margin:0 0 6px;font-size:15px;text-align:left;"><strong>为什么值得关注</strong>：{{}}</p>
+  <section style="margin:0 0 30px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">{{工具名}} {{版本}}</p>
+    <p style="margin:0 0 10px;font-size:12px;color:#6b7280;text-align:left;">{{平台 / 作者}} ｜ {{发布日期}} · {{规模数据}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>一句话定位</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>核心思路</strong>：{{不堆配置名与命令}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>适用场景与边界</strong>：{{场景 + 厂商自测口径 + 具体局限}}；<strong>安装与效果验证无需记命令，把项目名或链接交给 AI Agent 即可完成</strong>。</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>为什么值得关注</strong>：{{}}</p>
     <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">https://{{一手链接}}</p>
   </section>
+  <!-- 第三部分只有一条，用「16px 条目标题 + 12px 信息行 + 15px 内联子段」的单条目结构。禁止把「核心思路」「适用场景」拆成 16px 标题 + dashed 的独立小节，否则读者会当成新条目；也不要另套绿底卡片 -->
 
   <!-- 第四部分 -->
   <section style="margin:30px 0 16px;padding:0;border-bottom:none;">
     <p style="margin:0;padding:0 0 0 11px;border-left:4px solid #c0392b;font-size:18px;font-weight:700;color:#1f2d3d;line-height:1.45;text-align:left;">四、DeepSeek-Harness 最新版本</p>
   </section>
 
-  <section style="margin:0 0 16px;padding:10px 12px;background:#eef4fc;border-left:4px solid #1a4d8f;border-radius:0;">
-    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">{{有新版本：dsh-vX.Y.Z｜或「今日无新增」}}</p>
-    <p style="margin:0;font-size:15px;text-align:left;">{{YYYY-MM-DD HH:MM（北京时间）发布，版本性质}}</p>
+  <!-- 有新增：用下面这个单条目结构 -->
+  <section style="margin:0 0 30px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">{{dsh-vX.Y.Z：一句话概括这次更新}}</p>
+    <p style="margin:0 0 10px;font-size:12px;color:#6b7280;text-align:left;">DeepSeek ｜ {{YYYY-MM-DD HH:MM（北京时间）}}发布 · {{版本性质}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>主要更新</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>破坏性变更与版本门槛</strong>：{{直接写具体事实，用户需要判断}}</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">https://github.com/deepseek-ai/deepseek-harness/releases/tag/{{TAG}}</p>
   </section>
 
-  <section style="margin:0 0 12px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
-    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">新增功能</p>
-    <p style="margin:0;font-size:15px;text-align:left;">{{主要更新与变更点}}</p>
-  </section>
-
-  <section style="margin:0 0 30px;padding:10px 12px;background:#fff8f3;border-left:4px solid #d97706;border-radius:0;">
-    <p style="margin:0 0 6px;font-size:15px;font-weight:700;color:#b45309;text-align:left;">升级前要处理的破坏性变更</p>
-    <p style="margin:0 0 6px;font-size:15px;text-align:left;">{{变更点与版本依赖门槛}}</p>
-    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;text-align:left;">https://github.com/deepseek-ai/deepseek-harness/releases/tag/{{TAG}}</p>
+  <!-- 无新增：改用中性提示框（全篇「今日无」统一这一种样式，不要蓝底、不要绿底） -->
+  <section style="margin:0 0 30px;padding:10px 12px;background:#f7f8fa;border-left:3px solid #c9ced6;border-radius:0;">
+    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">今日无新增</p>
+    <p style="margin:0 0 6px;font-size:15px;text-align:left;">当前最新版本仍为 {{dsh-vX.Y.Z}}（{{M 月 D 日}}发布）。</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;text-align:left;">https://github.com/deepseek-ai/deepseek-harness/releases</p>
   </section>
 
   <!-- 第五部分 -->
@@ -113,24 +106,22 @@
   </section>
   <!-- 标题下直接进 ①，不要「今天是一次集中批量更新」等盘点框 -->
 
-  <section style="margin:0 0 12px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+  <section style="margin:0 0 18px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
     <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">① 新增 / 更新条目</p>
     <p style="margin:0;font-size:15px;text-align:left;">清单索引约 {{N}} 个插件，<strong>新增约 {{N}} 条、约 {{N}} 条更新了安装信息、{{N}} 条下架</strong>。</p>
   </section>
 
-  <section style="margin:0 0 10px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+  <section style="margin:0 0 18px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
     <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">② 实用插件重点推荐</p>
+    <p style="margin:0 0 4px;font-size:12px;color:#6b7280;text-align:left;">{{分类}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>{{插件名}}</strong>（GitHub ★ {{4}}）：{{一句话功能}}。<span style="color:#2f855a;">【{{推荐标签}}】</span>{{适用场景}}。</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>{{插件名}}</strong>（GitHub ★ {{4}}）：{{一句话功能与适用场景}}。</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">插件 https://github.com/{{owner}}/{{repo}}</p>
   </section>
-
-  <section style="margin:0 0 8px;padding:10px 12px;background:#fafbfc;border-left:3px solid #1a4d8f;border-radius:0;">
-    <p style="margin:0 0 4px;font-size:15px;font-weight:700;text-align:left;">{{分类}}</p>
-    <p style="margin:0 0 5px;font-size:14px;text-align:left;">• <strong>{{插件名}}</strong>（{{Star}}）：{{一句话功能}}。<span style="color:#2f855a;">【{{推荐标签}}】</span>{{适用场景}}</p>
-    <p style="margin:0;font-size:14px;text-align:left;">• <strong>{{插件名}}</strong>（{{Star}}）：{{一句话功能与适用场景}}</p>
-  </section>
-  <!-- 按分类复制；重心放功能解读与适用场景，不成串列 PR 编号 -->
+  <!-- ①②③ 必须是同构条目：同样 16px 标题行 + 15px 正文 + 末尾链接段。禁止给推荐插件套灰底卡片，否则读者会把它读成 ② 条目的附注；推荐插件的地址放在 ② 自己的链接段，不要堆到 ③ 下面 -->
 
   <section style="margin:0 0 16px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
-    <p style="margin:0;font-size:15px;text-align:left;"><strong>③ 榜单头部插件排名变化：今日无</strong></p>
+    <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">③ 榜单头部插件排名变化：今日无</p>
     <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">https://github.com/awesome-dsh-plugin/awesome-dsh-plugin</p>
   </section>
 
@@ -140,19 +131,48 @@
   </section>
   <!-- 单一板块：标题下直接进官方动态 / 工具动态，不要盘点框、不拆多个小节堆叠 -->
 
-  <section style="margin:0 0 12px;padding:10px 12px;background:#fafbfc;border-left:3px solid #1a4d8f;border-radius:0;">
-    <p style="margin:0 0 6px;font-size:15px;font-weight:700;text-align:left;">01 {{官方动态标题}}</p>
-    <p style="margin:0 0 7px;font-size:14px;text-align:left;">{{机构 / 仓库 / Star / 北京时间}}</p>
-    <p style="margin:0 0 7px;font-size:14px;text-align:left;">• {{变更点与版本依赖门槛}}</p>
-    <p style="margin:0 0 7px;font-size:14px;text-align:left;"><strong>为何关注</strong>：{{}}</p>
+  <section style="margin:0 0 18px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">{{官方动态标题}}</p>
+    <p style="margin:0 0 8px;font-size:12px;color:#6b7280;text-align:left;">{{机构 / 仓库}} ｜ GitHub ★ {{N}} ｜ {{YYYY-MM-DD（北京时间）}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>变更点与版本门槛</strong>：{{}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>为何关注</strong>：{{}}</p>
     <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.7;text-align:left;">https://{{MathWorks 官方 / GitHub Releases 一手链接}}</p>
   </section>
 
   <section style="margin:0 0 16px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
-    <p style="margin:0 0 6px;font-size:15px;font-weight:700;color:#1f2d3d;text-align:left;">工具动态</p>
-    <p style="margin:0 0 8px;font-size:15px;text-align:left;">{{工具名、版本 / Star、一句话功能与适用场景；保留具体局限如不支持 Linux ARM}}</p>
+    <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">工具动态｜{{工具名}} {{版本}}</p>
+    <p style="margin:0 0 8px;font-size:12px;color:#6b7280;text-align:left;">{{机构 / 仓库}} ｜ GitHub ★ {{N}} ｜ {{YYYY-MM-DD}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;">{{一句话功能与适用场景；保留具体局限如不支持 Linux ARM}}</p>
     <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">官方总入口 https://www.mathworks.com/products/agentic-ai.html<br>github.com/matlab/{{仓库}}</p>
   </section>
+  <!-- 无动态时整块换成一个中性提示框：16px「今日无」+ 15px 当前最新版本 + 链接，样式与第四部分完全一致（#f7f8fa 底 + #c9ced6 左条） -->
+
+  <!-- 第七部分 -->
+  <section style="margin:30px 0 16px;padding:0;border-bottom:none;">
+    <p style="margin:0;padding:0 0 0 11px;border-left:4px solid #c0392b;font-size:18px;font-weight:700;color:#1f2d3d;line-height:1.45;text-align:left;">七、AutoResearch 论文与开源动态</p>
+  </section>
+  <!-- 标题下直接进内容；检索不到写「今日无」；不用窗口外内容凑数 -->
+
+  <section style="margin:0 0 18px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">① {{论文标题}}：{{一句话发现}}</p>
+    <p style="margin:0 0 10px;font-size:12px;color:#6b7280;text-align:left;">{{团队 / 机构}} ｜ {{期刊或会议名（影响因子）/ arXiv 预印本}} ｜ {{YYYY-MM-DD}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;">{{方法与关键结果，一句话}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>边界与局限</strong>：{{场景限制 / 自建基准 / 参数量级 / 未开源}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>为什么值得关注</strong>：{{}}</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">论文 https://{{DOI 或 arXiv 链接}}</p>
+  </section>
+  <!-- 按重要性复制 1-3 条；期刊/会议论文标注期刊或会议名，arXiv 标注「预印本」 -->
+
+  <!-- 开源项目：与论文并列，沿用同一套序号（接着论文的 ①② 往下排 ③），用同样的标题行 + 信息行 + 三段结构 + 末尾链接，不要灰底卡片、不要蓝条。信息行必须带 GitHub 星标（实查 api.github.com，查不到就不写，不编） -->
+  <section style="margin:0 0 30px;padding:0 0 14px;border-bottom:1px dashed #e3e6eb;">
+    <p style="margin:0 0 4px;font-size:16px;font-weight:700;color:#1f2d3d;text-align:left;">③ 开源项目｜{{项目名}} {{版本}}：{{一句话功能}}</p>
+    <p style="margin:0 0 10px;font-size:12px;color:#6b7280;text-align:left;">{{owner/repo}} ｜ GitHub ★ {{6,915}}（{{M-D}} 抓取）<br>{{YYYY-MM-DD 发布版本}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>做了什么</strong>：{{核心改动与关键数据}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>边界与局限</strong>：{{作者自述的限制}}</p>
+    <p style="margin:0 0 8px;font-size:15px;text-align:left;"><strong>为什么值得关注</strong>：{{}}</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#8a919b;word-break:break-all;line-height:1.8;text-align:left;">项目地址 https://github.com/{{owner}}/{{repo}}</p>
+  </section>
+  <!-- 只收新项目 / 重大 release / 重大功能更新；零散提交不收；无则整块写「今日无」 -->
 
   <section style="margin:0;padding:14px 0 0;border-top:1px solid #e8eaed;">
     <p style="margin:0;font-size:12px;color:#8a919b;line-height:1.8;text-align:left;">编发｜算法牛马</p>

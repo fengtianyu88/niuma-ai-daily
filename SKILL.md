@@ -1,6 +1,6 @@
 ---
 name: niuma-ai-daily
-description: 生成并推送《牛马AI日报》到微信公众号「算法牛马」草稿箱的完整可复现流程。触发场景：跑今天的日报/晨报、生成每日 AI 简报、按 19 个监控源核查官方技术报告、推送公众号草稿、每日 06:15 定时任务、修改或重跑某期日报。覆盖过去 24 小时 AI 要闻、19 源技术报告（官网→arXiv 补漏）、AI 工具技巧、DeepSeek-Harness 版本、Awesome DSH Plugin 清单、MATLAB/Simulink × Agent 动态，以及公众号全宽排版、封面生成、草稿推送与回读验证。
+description: 生成并推送《牛马AI日报》到微信公众号「算法牛马」草稿箱的完整可复现流程。触发场景：跑今天的日报/晨报、生成每日 AI 简报、按 19 个监控源核查官方技术报告、推送公众号草稿、每日 05:00 定时任务、修改或重跑某期日报。覆盖过去 24 小时 AI 要闻、19 源技术报告（官网→arXiv 补漏）、AI 工具技巧、DeepSeek-Harness 版本、Awesome DSH Plugin 清单、MATLAB/Simulink × Agent 动态、AutoResearch 论文与开源动态（优先深度学习模型自我迭代、已有数据集上的自主架构与超参迭代），以及公众号全宽排版、封面生成、草稿推送与回读验证。
 ---
 
 # 牛马AI日报
@@ -12,24 +12,24 @@ description: 生成并推送《牛马AI日报》到微信公众号「算法牛�
 - 栏目名固定「**牛马AI日报**」（全连写，任何位置不留空格）。账号署名「**算法牛马**」。
 - 文章标题：`牛马AI日报 · YYYY 年 M 月 D 日`（栏目名与日期之间保留「 · 」）。日期按北京时间（Asia/Shanghai）。
 - 检索窗口 = 运行时刻往前 24 小时。**全文只写窗口内**，不回顾、不列窗口外索引。
-- 固定**六部分**，顺序不变，每期必含。
+- 固定**七部分**，顺序不变，每期必含。
 - 文件名沿用 `每日AI晨报_{date}_公众号.html` / `每日AI晨报_{date}.md` / `cover_{date}.jpg`；定时任务名「每日 AI 晨报」。文件名和任务名不是题目，不要改成日报。
 - 工作区为唯一真源：`C:\Users\tiany\WorkBuddy\2026-11-12-10-41-56`。脚本、监控源清单、既有稿件都在这里，不要在 Skill 目录复制脚本。
 
 ## 工作流
 
 1. **定日期与窗口**：取北京时间当天日期 `YYYY-MM-DD`，窗口为过去 24 小时。产物一律带当天日期后缀。
-2. **检索六部分**：按 [references/spec.md](references/spec.md) 的六部分要求逐项查。第二部分按 [references/monitor-sources.md](references/monitor-sources.md) 对 **19 个来源统一**执行「先各自官网、后 arXiv 补漏」，核对一手官方链接与发布日期。arXiv 无机构字段，别名检索有漏检，禁止宣称「已完整覆盖」。
+2. **检索七部分**：按 [references/spec.md](references/spec.md) 的七部分要求逐项查。第二部分按 [references/monitor-sources.md](references/monitor-sources.md) 对 **19 个来源统一**执行「先各自官网、后 arXiv 补漏」，核对一手官方链接与发布日期。arXiv 无机构字段，别名检索有漏检，禁止宣称「已完整覆盖」。
 3. **写核查底稿**：先出 `每日AI晨报_{date}.md`。底稿保留检索窗口、逐家核对记录、arXiv 检索式、收录/不收录理由，便于复现与审计。底稿里的编辑部信息**不进公众号正文**。
 4. **写公众号 HTML**：以 [assets/article_skeleton.html](assets/article_skeleton.html) 为骨架，按 [references/layout.md](references/layout.md) 的样式串填内容。全内联样式、全宽顶格、每个 `<p>` 带 `text-align:left`、来源链接放在该段内容之后。
 5. **生成封面**：`python make_cover.py --date {date} --out cover_{date}.jpg`，主标题必须是「牛马AI日报」。
-6. **渲染预览**：用 Chrome/Edge `--headless --screenshot`，800px 视口 + 固定 375px 内容栏居中再裁剪，产出 `排版预览_顶部特写.png` / `中段特写.png` / `第六部分.png` / `手机端.png`。细节见 [references/delivery.md](references/delivery.md)。
-7. **推送并回读**：`python wechat_draft_push.py --upsert`（当天重跑自动更新原草稿、不新建重复草稿）。推送后必须 `draft/count` + `draft/batchget` + `draft/get` 回读，比对标题、作者、封面、可见正文与链接数，确认落库再回报。
+6. **渲染预览**：用 Chrome/Edge `--headless --screenshot`，800px 视口 + 固定 375px 内容栏居中再裁剪，产出 `排版预览_顶部特写.png` / `中段特写.png` / `末段.png` / `手机端.png`。细节见 [references/delivery.md](references/delivery.md)。
+7. **推送并回读**：`python wechat_draft_push.py --upsert`（当天重跑自动更新原草稿、不新建重复草稿）。推送后必须 `draft/count` + `draft/batchget` + `draft/get` 回读，比对标题、作者、封面、可见正文与链接数，确认落库再回报。**周日若同时有 BMS 算法周报**，用 `--second-html` / `--second-title` 并成同一条多图文的次条（订阅号一天只能群发一次），并清掉当天残留的单篇重复草稿。
 8. **收尾**：清理临时脚本，把本期实查结论追加到工作区 `.workbuddy/memory/{date}.md`。
 
 ## 写法底线
 
-结论先行：头部固定「本期速览」，六部分各一句信息点；每个板块先给判断再给必要证据。不写安装命令、分步操作、配置参数、最短上手路径——需要时统一一句「把项目名或链接交给 AI Agent 即可完成」。
+结论先行：头部固定「本期速览」，七部分各一句信息点；每个板块先给判断再给必要证据。不写安装命令、分步操作、配置参数、最短上手路径——需要时统一一句「把项目名或链接交给 AI Agent 即可完成」。
 
 **以下一律不进公众号正文**：检索窗口与核查口径、逐家核查看板、来源计数（「19 个来源」「13 家」）、凑数与缺口交代（「补上第 3 份」「其余 16 个没有」「不足 3 份」）、板块盘点框（「今天有 2 条官方动态」「今天是一次集中批量更新」「没有新新闻稿」）、眉标自报条数（「本期速览 · 6 个信息点」只写「本期速览」）、「（节选）」「在列」「按官网为主只计一次」、窗口外日期的核查解释、窗口外内容、通用边界与免责套话、「无变动」的理由、每日重复的模板句、成串插件名 + PR 编号 / 提交次数 / UTC 时间戳等机器清单。
 
@@ -44,6 +44,9 @@ description: 生成并推送《牛马AI日报》到微信公众号「算法牛�
 - 以事实为准，不夸大、不编造链接；未验证的域名不写入正文。
 - 第二部分不足 3 份按实际数量输出，**不用旧报告凑数**；缺口结论只进底稿。
 - 第 4/5 部分检索不到更新 → 如实写「今日无新增」/「今日无」，不给理由。
+- 第七部分方向优先级：**深度学习模型的自我迭代**优先，其次是在**已有数据集上不受限地自学习迭代**（架构优化、超参迭代、自训练与自评估）；只有 agent 帮人跑实验、模型自身不改进的，降级或不收。检索不到够格论文或项目 → 如实写「今日无」，不用窗口外内容或次级方向凑数。
+- **开源项目必须标 GitHub 星标**：第七部分写 `GitHub ★ 6,915（11-15 抓取）`，第五部分插件、第六部分工具内联只写 `GitHub ★ 4`。星标一律 `api.github.com/repos/{owner}/{repo}` 实查，查不到就不标、不编；仓库地址同样实查能访问。
+- **排版层级只有三档、同一板块必须同构**：18px 章节 / 16px 条目标题 / 15px 内联子段；子段顺序统一「事实 → 边界 → 判断」；序号用圈号；「今日无」用中性灰框。任何一条看起来像上一条的附注，就是同构被破坏。
 - 模型 / 产品发布不等同于技术报告；方案介绍博客不算研究报告。
 - 同一成果官网与 arXiv 重复只计一次，以官网为主；arXiv 条目标注「预印本」。
 - 时间统一写北京时间，不写 UTC + 换算双写。
@@ -53,7 +56,7 @@ description: 生成并推送《牛马AI日报》到微信公众号「算法牛�
 
 | 文件 | 何时读 |
 |---|---|
-| [references/spec.md](references/spec.md) | 确定六部分写什么、读者定位、全部硬约束与边界 |
+| [references/spec.md](references/spec.md) | 确定七部分写什么、读者定位、全部硬约束与边界 |
 | [references/monitor-sources.md](references/monitor-sources.md) | 第二部分检索：19 源名单、官网入口、arXiv 别名表与检索式 |
 | [references/layout.md](references/layout.md) | 写 HTML：结构、样式串、链接位置、字间距、自检清单 |
 | [references/delivery.md](references/delivery.md) | 封面、预览、微信 API、凭据、推送脚本参数、回读验证、故障排查 |
