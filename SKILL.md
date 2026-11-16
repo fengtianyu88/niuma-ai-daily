@@ -13,7 +13,8 @@ description: 生成并推送《牛马AI日报》到微信公众号「算法牛�
 - 文章标题：`牛马AI日报 · YYYY 年 M 月 D 日`（栏目名与日期之间保留「 · 」）。日期按北京时间（Asia/Shanghai）。
 - 检索窗口 = 运行时刻往前 24 小时。**全文只写窗口内**，不回顾、不列窗口外索引。
 - 固定**七部分**，顺序不变，每期必含。
-- 文件名沿用 `每日AI晨报_{date}_公众号.html` / `每日AI晨报_{date}.md` / `cover_{date}.jpg`；定时任务名「每日 AI 晨报」。文件名和任务名不是题目，不要改成日报。
+- 文件名沿用 `每日AI晨报_{date}_公众号.html` / `每日AI晨报_{date}.md` / `每日AI晨报_{date}_摘要.txt` / `cover_{date}.jpg`；定时任务名「每日 AI 晨报」。文件名和任务名不是题目，不要改成日报。
+- 每期除日报外必须另出一份**微信贴图摘要**（`.txt`，150–250 字），供公众号图片消息 / 贴图帖子直接粘贴。规则见 [references/spec.md](references/spec.md) 第七节。
 - 工作区为唯一真源：`C:\Users\tiany\WorkBuddy\2026-11-12-10-41-56`。脚本、监控源清单、既有稿件都在这里，不要在 Skill 目录复制脚本。
 
 ## 工作流
@@ -24,8 +25,9 @@ description: 生成并推送《牛马AI日报》到微信公众号「算法牛�
 4. **写公众号 HTML**：以 [assets/article_skeleton.html](assets/article_skeleton.html) 为骨架，按 [references/layout.md](references/layout.md) 的样式串填内容。全内联样式、全宽顶格、每个 `<p>` 带 `text-align:left`、来源链接放在该段内容之后。
 5. **生成封面**：`python make_cover.py --date {date} --out cover_{date}.jpg`，主标题必须是「牛马AI日报」。
 6. **渲染预览**：用 Chrome/Edge `--headless --screenshot`，800px 视口 + 固定 375px 内容栏居中再裁剪，产出 `排版预览_顶部特写.png` / `中段特写.png` / `末段.png` / `手机端.png`。细节见 [references/delivery.md](references/delivery.md)。
-7. **推送并回读**：`python wechat_draft_push.py --upsert`（当天重跑自动更新原草稿、不新建重复草稿）。推送后必须 `draft/count` + `draft/batchget` + `draft/get` 回读，比对标题、作者、封面、可见正文与链接数，确认落库再回报。**周日若同时有 BMS 算法周报**，用 `--second-html` / `--second-title` 并成同一条多图文的次条（订阅号一天只能群发一次），并清掉当天残留的单篇重复草稿。
-8. **收尾**：清理临时脚本，把本期实查结论追加到工作区 `.workbuddy/memory/{date}.md`。
+7. **写贴图摘要**：日报定稿后，从整篇内容提炼 `每日AI晨报_{date}_摘要.txt`——首行标题、空行、150–250 字正文，供公众号图片消息 / 贴图帖子直接粘贴。只用当期已核实的事实，不加新信息、不放链接、不写条数与口径。规则见 [references/spec.md](references/spec.md) 第七节。
+8. **推送并回读**：`python wechat_draft_push.py --upsert`（当天重跑自动更新原草稿、不新建重复草稿）。推送后必须 `draft/count` + `draft/batchget` + `draft/get` 回读，比对标题、作者、封面、可见正文与链接数，确认落库再回报。**周日若同时有 BMS 算法周报**，用 `--second-html` / `--second-title` 并成同一条多图文的次条（订阅号一天只能群发一次），并清掉当天残留的单篇重复草稿。
+9. **收尾**：清理临时脚本，把本期实查结论追加到工作区 `.workbuddy/memory/{date}.md`。
 
 ## 写法底线
 
@@ -53,6 +55,7 @@ description: 生成并推送《牛马AI日报》到微信公众号「算法牛�
 - 同一成果官网与 arXiv 重复只计一次，以官网为主；arXiv 条目标注「预印本」。
 - 时间统一写北京时间，不写 UTC + 换算双写。
 - 公众号正文不支持外链跳转，来源链接做成可复制的灰色纯文本。
+- **贴图摘要独立成文**：120–200 字、纯文本、无链接、无圈号、无 Markdown 符号、不加 emoji；事实只从当期日报里取，不新增信息、不写「今日无」的空板块，也不复用日报的速览七条原句平铺。
 
 ## 资源导航
 
