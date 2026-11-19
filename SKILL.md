@@ -1,6 +1,6 @@
 ---
 name: niuma-ai-daily
-description: 生成并推送《牛马AI日报》到微信公众号「算法牛马」草稿箱的完整可复现流程。触发场景：跑今天的日报/晨报、生成每日 AI 简报、按 19 个监控源核查官方技术报告、推送公众号草稿、每日 05:00 定时任务、修改或重跑某期日报。覆盖过去 24 小时 AI 要闻、19 源技术报告（官网→arXiv 补漏）、AI 工具技巧、DeepSeek-Harness 版本、Awesome DSH Plugin 清单、MATLAB/Simulink × Agent 动态、AutoResearch 论文与开源动态（优先深度学习模型自我迭代、已有数据集上的自主架构与超参迭代），以及公众号全宽排版、封面生成、草稿推送与回读验证。
+description: 生成并推送《牛马AI日报》到微信公众号「算法牛马」草稿箱的完整可复现流程。触发场景：跑今天的日报/晨报、生成每日 AI 简报、按 19 个监控源核查官方技术报告、推送公众号草稿、每日 05:00 定时任务、改或重跑某期日报、出微信贴图与图片消息。覆盖过去 24 小时 AI 要闻、19 源技术报告（官网→arXiv 补漏）、AI 工具技巧、DeepSeek-Harness 版本、Awesome DSH Plugin 清单、MATLAB/Simulink × Agent 动态、AutoResearch 论文与开源动态（优先深度学习模型自我迭代、已有数据集上的自主架构与超参迭代），以及公众号全宽排版、封面生成、贴图摘要与 8 张贴图、图文与图片消息双草稿推送与回读验证。
 ---
 
 # 牛马AI日报
@@ -15,6 +15,7 @@ description: 生成并推送《牛马AI日报》到微信公众号「算法牛�
 - 固定**七部分**，顺序不变，每期必含。
 - 文件名沿用 `每日AI晨报_{date}_公众号.html` / `每日AI晨报_{date}.md` / `每日AI晨报_{date}_摘要.txt` / `cover_{date}.jpg`；定时任务名「每日 AI 晨报」。文件名和任务名不是题目，不要改成日报。
 - 每期除日报外必须另出一份**微信贴图摘要**（`.txt`），内容**就是日报头部「本期速览」七条的纯文本照搬**：标题行 + 空行 + 七行原句（`一 要闻｜…` 到 `七 AutoResearch 追踪｜…`），不改写、不重排、不另行编号。规则见 [references/spec.md](references/spec.md) 第七节。
+- 摘要还要再落成**一组贴图**（`贴图_{date}_01.jpg` … `_08.jpg`，1080×1440），并作为公众号「**图片消息**」（`article_type=newspic`）单独建一条草稿。图文草稿与图片消息草稿每天**两条并存**，各自独立、互不覆盖；群发只能发一条，发哪条由用户在后台点。规则见 [references/spec.md](references/spec.md) 第八节、[references/delivery.md](references/delivery.md)「贴图（图片消息）推送」。
 - 工作区为唯一真源：`C:\Users\tiany\WorkBuddy\2026-11-12-10-41-56`。脚本、监控源清单、既有稿件都在这里，不要在 Skill 目录复制脚本。
 
 ## 工作流
@@ -27,7 +28,8 @@ description: 生成并推送《牛马AI日报》到微信公众号「算法牛�
 6. **渲染预览**：用 Chrome/Edge `--headless --screenshot`，800px 视口 + 固定 375px 内容栏居中再裁剪，产出 `排版预览_顶部特写.png` / `中段特写.png` / `末段.png` / `手机端.png`。细节见 [references/delivery.md](references/delivery.md)。
 7. **出贴图摘要**：日报 HTML 定稿后，用脚本从 `<!-- 本期速览 -->` 到 `<!-- 第一部分 -->` 之间抽出七条，剥掉 `<strong>`，写 `每日AI晨报_{date}_摘要.txt`：首行 `牛马AI日报 · YYYY 年 M 月 D 日`、空行、七行原句。**照搬，不重写、不压缩、不加 `1.` 编号、不删「今日无」行**。抽取代码见 [references/spec.md](references/spec.md) 第七节。
 8. **推送并回读**：`python wechat_draft_push.py --upsert`（当天重跑自动更新原草稿、不新建重复草稿）。推送后必须 `draft/count` + `draft/batchget` + `draft/get` 回读，比对标题、作者、封面、可见正文与链接数，确认落库再回报。**周日若同时有 BMS 算法周报**，用 `--second-html` / `--second-title` 并成同一条多图文的次条（订阅号一天只能群发一次），并清掉当天残留的单篇重复草稿。
-9. **收尾**：清理临时脚本，把本期实查结论追加到工作区 `.workbuddy/memory/{date}.md`。
+9. **出贴图并建图片消息草稿**：`python make_paste_images.py --date {date}` → 8 张 1080×1440 白底卡（01 封面 + 七板块目录，02–08 每板块一张，正文即摘要原句）；再 `python paste_push.py --date {date}` 把 8 张图换成永久素材 `media_id`、按 `article_type=newspic` 建图片消息草稿，正文为七条原句 + 「编发｜算法牛马」。回读核图片张数与正文。两条草稿并存，不要为了让路去删图文。
+10. **收尾**：清理临时脚本，把本期实查结论追加到工作区 `.workbuddy/memory/{date}.md`。
 
 ## 写法底线
 
@@ -56,6 +58,7 @@ description: 生成并推送《牛马AI日报》到微信公众号「算法牛�
 - 时间统一写北京时间，不写 UTC + 换算双写。
 - 公众号正文不支持外链跳转，来源链接做成可复制的灰色纯文本。
 - **贴图摘要 = 速览照搬**：逐行复制日报「本期速览」七条原句（`一 要闻｜…` 到 `七 AutoResearch 追踪｜…`），只用纯文本、剥掉 `<strong>`；不改写、不压缩、不合并、不调顺序、不加 `1.`/①②③ 编号（板块标签就是编号）、不删「今日无」行、不放链接与域名、不用 Markdown 与 emoji。速览改动后摘要必须重生成，顺序是先定稿 HTML 再抽 txt。
+- **贴图与图片消息每天必出**：8 张 1080×1440 白底卡，块内正文就是摘要原句；白底、墨色正文、唯一强调色栏目红 #c0392b、无装饰图形。图片消息用 `article_type=newspic`，判重**只认 `article_type == "newspic"`**——图文消息也会返回 `image_info`，按它判类型会把当天图文覆盖掉。
 
 ## 资源导航
 
@@ -77,3 +80,5 @@ description: 生成并推送《牛马AI日报》到微信公众号「算法牛�
 - **改同一期稿子**：一律 `draft/update`（`--update-media-id` 或 `--upsert`），不新建重复草稿。
 - **截图误判**：headless 截图文件写入有延迟，先确认文件存在且大小稳定再裁剪，不要过早判 FAIL。
 - **回读字符数不等**：微信端会删 HTML 注释、规范自闭合标签，属正常；只比对可见纯文本与链接数，不拿字符数直接判等。
+- **图文草稿被图片消息覆盖**：判重若用 `bool(image_info)` 会误伤当天图文（图文的 news_item 也带内嵌图片列表）。恢复顺序：删被覆盖的草稿 → `wechat_draft_push.py --upsert` 重建图文并确认 7160 字级正文与链接数一致 → 再跑 `paste_push.py` 建图片消息。
+- **图片消息接口报 40007 / 48001**：`image_media_id` 必须是永久素材返回的 media_id（不是 `media/uploadimg` 的 url）；48001 仍按账号权限处理，如实报错码，不伪造成功。

@@ -8,6 +8,8 @@
 |---|---|
 | `make_cover.py` | 生成 900×383 封面（Pillow + Windows 中文字体） |
 | `wechat_draft_push.py` | 抽取 HTML 复制区 → 上传封面 → `draft/add` / `draft/update` → 回读验证 |
+| `make_paste_images.py` | 读摘要 txt → 出 8 张 1080×1440 贴图（`贴图_{date}_01..08.jpg`） |
+| `paste_push.py` | 8 张图换永久素材 media_id → `draft/add` 建 `newspic` 图片消息草稿 → 回读验证 |
 
 ### 封面
 
@@ -55,6 +57,25 @@ python wechat_draft_push.py --update-media-id <media_id> --second-html ... --sec
 - `draft/add` 与 `draft/update` 都支持多图文：`articles` 传数组即建多图文，`draft/update` 用 `index` 逐篇更新（0 = 头条）。
 - **群发接口无权限**（订阅号 `message/mass/send` 返回 48001）：脚本只能把草稿建好、更新好，最后一步「群发」必须在公众号后台手动点。
 - 合并成多图文后，**删掉当天残留的单篇草稿**，否则草稿箱里同一天会出现两三份重复内容。删前先比对标题 + 篇数 + 正文长度，确认是被多图文取代的那份。
+
+### 贴图（图片消息）推送
+
+摘要 txt 定稿后**每天都要走这一步**（2026-11-20 用户定「以后每天都这么做」）：
+
+```bash
+# 1) 摘要 → 8 张 1080×1440 图片
+python make_paste_images.py --date 2026-11-20
+
+# 2) 8 张图 → 图片消息草稿（正文 = 七条原句 + 「编发｜算法牛马」）
+python paste_push.py --date 2026-11-20
+```
+
+- 接口：`material/add_material?type=image` 逐张换永久 `media_id` → `draft/add` 传 `{"article_type": "newspic", "title", "content", "image_info": {"image_list": [{"image_media_id": ...}]}}`。图片消息**不需要** `thumb_media_id`，也**不返回** author 字段（署名靠账号名，不必设）。
+- 标题与当日图文消息完全相同（都是 `牛马AI日报 · YYYY 年 M 月 D 日`），草稿箱里两条并存，靠缩略图与类型区分；这是约定，不要加「贴图版」后缀。
+- 回读：`draft/get` 核 `image_info.image_list` 张数、标题、可见正文（图片消息正文是纯文本，逐字比对成立）。
+- **必须只按 `article_type == "newspic"` 判重**：图文消息的 `news_item` 也会返回 `image_info`（正文内嵌图片列表），若用 `bool(image_info)` 判类型，会把当天图文草稿误判成图片消息，`draft/update` 直接**把图文覆盖成图片消息**（2026-11-20 实际发生，count 14→14，图文消失）。踩了这个坑的恢复顺序：删被覆盖的草稿 → `wechat_draft_push.py --upsert` 重建图文并回读通过 → 再建图片消息。
+- **订阅号一天只能群发一次**：图文与图片消息只能发一条，另一条留在草稿箱。两条都建好即算交付，发哪条由用户在后台决定，不要替用户删掉其中一条。
+
 
 ## 二、凭据与安全
 
